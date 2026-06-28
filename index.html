@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="摄影作品集 - 忆在云端">
+  <title>影集·回忆录</title>
+
+  <!-- 关键 CSS 内联 -->
+  <style>
+    /* 关键内联 CSS：保证首屏渲染 */
+    @font-face {
+      font-family: 'FZShuTi';
+      src: url('fonts/FZShuTi.woff2') format('woff2');
+      font-weight: normal;
+      font-style: normal;
+      font-display: swap;
+    }
+    :root{--bg-primary:#f5f5f5;--text-primary:#333;--accent:#d4a76a;--nav-bg:rgba(245,245,245,0.7)}
+    [data-theme="dark"]{--bg-primary:#1a1a1a;--text-primary:#e0e0e0;--accent:#c9955a;--nav-bg:rgba(26,26,26,0.7)}
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    html{font-size:16px;line-height:1.5;scroll-behavior:smooth}
+    body{font-family:'FZShuTi','方正舒体简体',serif;background-color:var(--bg-primary);color:var(--text-primary);overflow-x:hidden;transition:background-color .3s ease,color .3s ease}
+    img{display:block;max-width:100%;height:auto}
+    a{text-decoration:none;color:inherit}
+    .nav{position:fixed;top:0;left:0;width:100%;height:80px;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:0 40px;background:var(--nav-bg);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+    .nav__brand{font-family:'SimSun','宋体',serif;font-size:24pt;color:var(--text-primary);white-space:nowrap}
+    .nav__actions{display:flex;align-items:center;gap:16px}
+    .nav__theme-toggle,.nav__gallery-btn{width:48px;height:48px;border-radius:50%;border:2px solid var(--accent);background:0 0;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:border-color .3s ease,transform .3s ease;padding:0;overflow:hidden}
+    .nav__theme-toggle:hover,.nav__gallery-btn:hover{transform:scale(1.1)}
+    .nav__theme-toggle img,.nav__gallery-btn img{width:24px;height:24px;object-fit:contain;filter:brightness(0) saturate(100%)}
+    [data-theme="dark"] .nav__theme-toggle img,[data-theme="dark"] .nav__gallery-btn img{filter:brightness(0) saturate(100%) invert(1)}
+    .hero{position:relative;width:100%;height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+    .hero__bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .hero__overlay{position:absolute;inset:0;background:radial-gradient(circle at center,transparent 50%,rgba(0,0,0,.4) 100%)}
+    .hero__title{position:relative;z-index:1;display:flex;align-items:baseline;justify-content:center;gap:.5em;font-family:'FZShuTi','方正舒体简体',serif;font-size:clamp(48px,8vw,126pt);color:#fff;user-select:none;text-shadow:0 4px 12px rgba(0,0,0,.35),0 1px 3px rgba(0,0,0,.2)}
+    .hero__title--top{transform:translateY(-1em)}
+    .hero__title--bottom{}
+    .section--reveal{opacity:0;transform:translateY(40px)}
+    .section--reveal.is-visible{opacity:1;transform:translateY(0);transition:opacity .6s cubic-bezier(.25,.46,.45,.94),transform .6s cubic-bezier(.25,.46,.45,.94)}
+    @media(max-width:767px){.nav{padding:0 16px;height:64px}.nav__brand{font-size:18pt}.nav__theme-toggle,.nav__gallery-btn{width:40px;height:40px}.nav__theme-toggle img,.nav__gallery-btn img{width:20px;height:20px}.hero__title{font-size:clamp(36px,10vw,64px)}}
+  </style>
+
+  <!-- 非关键 CSS 异步加载 -->
+  <link rel="preload" href="css/styles.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+  <noscript><link rel="stylesheet" href="css/styles.css"></noscript>
+</head>
+<body>
+
+  <!-- ========== 导航栏 ========== -->
+  <nav class="nav" role="navigation">
+    <span class="nav__brand">影集·回忆录</span>
+    <div class="nav__actions">
+      <!-- 深色模式切换 -->
+      <button class="nav__theme-toggle" aria-label="切换深色模式">
+        <img src="images/zhuti.png" alt="主题" loading="lazy">
+      </button>
+      <!-- 二级页面入口 -->
+      <button class="nav__gallery-btn" aria-label="进入影集">
+        <img src="images/tupian.png" alt="影集" loading="lazy">
+      </button>
+    </div>
+  </nav>
+
+  <!-- ========== 首屏区域 ========== -->
+  <section class="hero" aria-label="首屏展示">
+    <img class="hero__bg" src="images/1.jpg" alt="首屏背景">
+    <div class="hero__overlay"></div>
+    <h1 class="hero__title">
+      <span class="hero__title--top">忆在</span>
+      <span class="hero__title--bottom">云端</span>
+    </h1>
+  </section>
+
+  <!-- ========== 主内容区 ========== -->
+  <main>
+    <!-- 作品轮播区 -->
+    <section class="section section--reveal carousel-section" aria-label="作品影集轮播">
+      <h2 class="carousel-section__title">作品影集</h2>
+
+      <div class="carousel-wrapper">
+        <button class="carousel__arrow carousel__arrow--left" aria-label="上一张"></button>
+        <div class="carousel">
+          <div class="carousel__track">
+            <!-- 轮播图：至少 3 张，用户自行放入对应图片 -->
+            <div class="carousel__slide">
+              <img src="images/2.jpg" alt="作品 1" loading="lazy">
+            </div>
+            <div class="carousel__slide">
+              <img src="images/3.jpg" alt="作品 2" loading="lazy">
+            </div>
+            <div class="carousel__slide">
+              <img src="images/4.jpg" alt="作品 3" loading="lazy">
+            </div>
+            <div class="carousel__slide">
+              <img src="images/5.jpg" alt="作品 4" loading="lazy">
+            </div>
+          </div>
+        </div>
+        <button class="carousel__arrow carousel__arrow--right" aria-label="下一张"></button>
+      </div>
+
+      <!-- 指示器 -->
+      <div class="carousel__indicators"></div>
+    </section>
+  </main>
+
+  <!-- ========== 脚本 ========== -->
+  <script src="js/main.js"></script>
+</body>
+</html>
